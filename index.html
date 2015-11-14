@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Popcorn - Scalable and private media consumption</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/serif.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Popcorn</h1>
+					<h3>Scalable and private media consumption with Popcorn</h3>
+					<p>
+						<br/>
+						<small>Trinabh Gupta / Natacha Crooks / Srinath Setty / Lorenzo Alvisi / Michael Walfish </small>
+						<small>UT Austin / MPI-SWS / Microsoft Research / NYU</small>
+					</p>
+					<p>
+						<small style="font-size: 0.5em;">Created by <a href="http://www.github.com/keylorch">Keylor Chaves</a> / <a href="http://twitter.com/keylorch">@keylorch</a></small>
+					</p>
+					<aside class="notes">
+						MPI-SWS: Max Planck Institute for Software Systems
+					</aside>
+				</section>
+
+				<section>
+					<h2>What?</h2>
+					<p>
+						Popcorn: A media content delivery system that comprehensively hides <b>what</b> is consumed but not necessarily <b>who</b> is doing the consumption.
+					</p>
+					<br/>
+					<div class="fragment current-visible">
+						<img src="img/netflix.svg" width="20%" class="in-line">
+						<img src="img/hulu.svg" width="20%" class="in-line">
+						<img src="img/hbo.svg" width="20%" class="in-line">
+					</div>
+				</section>
+
+				<section>
+					<h2>Why?</h2>
+					<br/>
+					<ul>
+						<li>People uncomfortable about exposing their media diet</li>
+						<li>Sexual orientation </li>
+						<li>Political leanings</li>
+						<li>Private cultural affiliations</li>
+						<li>PRIVACY</li>
+					</ul>
+					<aside class="notes">
+						[PROBLEM OF THE PAPER] Explain that a lot of that information can be inferred from media consumption history and although many people do not share this discomfort, on the contrary, they want to expose their consumption to gain recommendations, others don't
+					</aside>
+				</section>
+
+				<section>
+					<p>Is it possible to build a system that hides content consumption while respecting current commercial arrangements, and if so, what would that system cost?</p>
+					<aside class="notes">
+						This paper asks the question...
+					</aside>
+				</section>
+
+				<section>
+					<h2>Requirements</h2>
+					<ol>
+						<li>Hide requests, in a way that is comprehensive and provable.</li>
+						<li>Make it affordable, even at scale</li>
+						<li>Respect current controls on content dissemination</li>
+					</ol>
+					<aside class="notes">
+						1. Hides it from eavesdroppers and the content distributor itself.<br/>
+						2. They should result in no more than a small multiple of what customers pay to access content today
+
+					</aside>
+				</section>
+
+				<section>
+					<h2>Private Information Retrieval (PIR)</h2>
+					<p>Protocols that allow clients (content consumers) to request content from one or more servers (content distributors) without them inferring which items the clients requested.</p>
+				</section>
+
+				<section>
+					<h2>Popcorn Strategy</h2>
+					<ol>
+						<li>Combines two types of PIR: ITPIR and CPIR</li>
+						<li>Requests batching</li>
+						<li>Offline Work</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Scenario</h2>
+					<img src="img/scenario.png">
+				</section>
+
+				<section>
+					<h2>PIR</h2>
+					<img src="img/PIR.png">
+					<p><small><i>k</i> servers</small></p>
+					<aside class="notes">
+						A PIR protocol is structured around three procedures: Query, Answer, and Decode.
+					</aside>
+				</section>
+
+				<section>
+					<h2>Computational PIR (CPIR)</h2>
+					<p>Commonly constructed using additively homomorphic cryptosystems. <i>k</i> = 1</p>
+					<img src="img/CPIR1.png" width="70%">
+					<div>
+						<p style="display: inline-block; padding-right: 5%;">
+						<small>
+						<i>k</i>: number of servers<br/>
+						<i>n</i>: size of the library<br/>
+						</small>
+					</p>
+					<p style="display: inline-block;">
+						<small>
+							<i>L</i>: Library<br/>
+							<i>l</i>: size (bits) of each object in L<br/>
+						</small>
+					</p>
+					</div>
+				</section>
+
+				<section>
+					<h2>Computational PIR (CPIR)</h2>
+					<img src="img/CPIR2.png" width="70%">
+					<div>
+						<p style="display: inline-block; padding-right: 5%;">
+						<small>
+						<i>k</i>: number of servers<br/>
+						<i>n</i>: size of the library<br/>
+						</small>
+					</p>
+					<p style="display: inline-block;">
+						<small>
+							<i>L</i>: Library<br/>
+							<i>l</i>: size (bits) of each object in L<br/>
+						</small>
+					</p>
+					</div>
+				</section>
+
+				<section>
+					<h2>Computational PIR (CPIR)</h2>
+					<img src="img/CPIR3.png" width="70%">
+					<div>
+						<p style="display: inline-block; padding-right: 5%;">
+						<small>
+						<i>k</i>: number of servers<br/>
+						<i>n</i>: size of the library<br/>
+						</small>
+					</p>
+					<p style="display: inline-block;">
+						<small>
+							<i>L</i>: Library<br/>
+							<i>l</i>: size (bits) of each object in L<br/>
+						</small>
+					</p>
+					</div>
+				</section>
+
+				<section>
+					<h2>Information-theoretic PIR (ITPIR)</h2>
+					<p>Multi-server PIR protocols. <i>k > 1</i>. </p><p>Each <i>k</i> needs to belong to different administrative domains</p>
+					<p>Chor-Goldreich-Kushilevitz-Sudan (CGKS) IPPIR Protocol</p>
+				</section>
+
+				<section>
+					<h2>(CGKS) IPPIR Protocol</h2>
+					<img src="img/ITPIR1.png" width="80%">
+					<div>
+						<p style="display: inline-block; padding-right: 5%;">
+						<small>
+						<i>k</i>: number of servers<br/>
+						<i>n</i>: size of the library<br/>
+						</small>
+					</p>
+					<p style="display: inline-block;">
+						<small>
+							<i>L</i>: Library<br/>
+							<i>l</i>: size (bits) of each object in L<br/>
+						</small>
+					</p></div>
+				</section>
+
+				<section>
+					<h2>(CGKS) IPPIR Protocol</h2>
+					<img src="img/ITPIR2.png" width="80%">
+					<div>
+						<p style="display: inline-block; padding-right: 5%;">
+						<small>
+						<i>k</i>: number of servers<br/>
+						<i>n</i>: size of the library<br/>
+						</small>
+					</p>
+					<p style="display: inline-block;">
+						<small>
+							<i>L</i>: Library<br/>
+							<i>l</i>: size (bits) of each object in L<br/>
+						</small>
+					</p></div>
+				</section>
+
+				<section>
+					<h2>(CGKS) IPPIR Protocol</h2>
+					<img src="img/ITPIR3.png" width="80%">
+					<div>
+						<p style="display: inline-block; padding-right: 5%;">
+						<small>
+						<i>k</i>: number of servers<br/>
+						<i>n</i>: size of the library<br/>
+						</small>
+					</p>
+					<p style="display: inline-block;">
+						<small>
+							<i>L</i>: Library<br/>
+							<i>l</i>: size (bits) of each object in L<br/>
+						</small>
+					</p></div>
+				</section>
+
+				<section>
+					<h2>Challenges of using PIR</h2>
+					<br/>
+					<ul>
+						<li>ITPIR requires multiple non-colluding servers</li>
+						<li>CPIR requires expensive cryptographic operations</li>
+						<li>CPIR: the server must load and process all <i>n</i> objects in <i>L</i></li>
+						<li>ITPIR: all servers combined must compute over <i>n</i> objects to serve one on them on average</li>
+						<li>Each query induces <i>O(n)</i> more work</li>
+					</ul>
+					<aside class="notes">
+						The fastest known CPIR protocols [8] are approximately 10-100× slower than ITPIR protocols<br/>
+						Main issue: they are not able to perform at scale. ITPIR (§2.4) requires multiple non- colluding servers, and thus multiple administrative domains, which means library content would have to disseminate beyond its original distribution channel, in apparent conflict with the requirement of respecting existing controls on dissemination
+					</aside>
+				</section>
+
+				<section>
+					<h2>Popcorn Architecture</h2>
+					<img src="img/library.png">
+					<aside class="notes">
+						each media file is split into segments, and the library is partitioned into columns<br/>
+						A segment is a variable-sized contiguous piece of a media<br/>
+						A column is the union of each of the corresponding segments for the n objects in the library (each is presumed to have the same decomposition into segments—which may require padding objects (§8));
+					</aside>
+				</section>
+
+				<section>
+					<h2>Popcorn Architecture</h2>
+					<img src="img/servers.svg">
+					<aside class="notes">
+					A primary content distributor creates an encrypted version of the library, LEnc, using per-object keys, and replicates LEnc to secondary content distributors, each in separate administrative domains. The primary content distributor maintains a key server, and each secondary content distributor maintains an object server<br/>
+					The key server serves the per-object keys using CPIR, and the object servers deliver encrypted objects using IT- PIR.<Br/>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Content Retrieval Protocol</h2>
+					<br/>
+					<div>
+						<img src="img/servers-1.png" width="50%" style="display:inline-block;  vertical-align: middle;">
+						<ol style="display: inline-block; width:45%; vertical-align: middle;">
+							<li>A client retrieves the object's decryption key from the key server using CPIR</li>
+							<br/>
+						</ol>
+						
+					</div>
+				</section>
+
+				<section>
+					<h2>Content Retrieval Protocol</h2>
+					<br/>
+					<div>
+						<img src="img/servers-2.png" width="50%" style="display:inline-block;  vertical-align: middle;">
+						<ol start="2" style="display: inline-block; width:45%; vertical-align: middle;">
+							<li>Retrieves the encrypted object (via segments/chunks) from the object servers using ITPIR</li>
+						</ol>
+					</div>
+				</section>
+
+				<section>
+					<h2>Composing ITPIR and CPIR</h2>
+					<br/>
+					<ul>
+						<li>Both keys and objects are served privately</li>
+						<li>CPIR is not a performance bottleneck (small keys)</li>
+						<li>Current controls on content protection are respected (<i>m</i> is stored only at the primary content distributor)</li>
+					</ul>
+					<p>Pending: Overhead of ITPIR: uses <i>XOR</i>, but needs to read <i>n/2</i> segments on average </p>
+				</section>
+
+				<section>
+					<h2>Batching</h2>
+					<br/>
+					<ul>
+						<li>The server can amortize the cost of reading a column over a batch of queries</li>
+					</ul>
+					<br/>
+					<br/>
+					<div>
+						<ul style="display: inline-block; width:45%; vertical-align: middle;">
+							<li><i>q . L</i> can be replaced by <i>Q . L</i> where <i>Q</i> is a matrix whose rows are query vectors</li>
+						</ul>
+						<img src="img/ITPIR2-Q.png" width="50%" style="display:inline-block;  vertical-align: middle;">
+					</div>
+				</section>
+
+				<section>
+					<h2>Specializing batching for media delivery</h2>
+					<br/>
+					<ul>
+					<li>A client's initial delay  is given only by the time it has to wait before it can download the first segment.</li>
+					<li>Other segments are not needid until later and can afford higher processing times.</li>
+					<li>We need to carefully choose, for each column, the longest possible processing cycle, such that users perceive a low inidital delay <i>d</i> and that the movie is played back smoothly</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Moving work offline</h2>
+					<p><b>Limitation: </b> Given that <i>d</i> is small, the batch sizes for these columns are also small, and the per-request I/O is high</p>
+					<div>
+						<img style="display: inline-block; vertical-align: middle;" src="img/ITPIR1.png" width="60%">
+						<ul style="display: inline-block; vertical-align: middle; width: 35%; font-size: 0.6em;">
+							<li>Only <i>q<sub>k</sub></i> depends on <i>b</i></li>
+							<li>We can compute the reply to the first <i>k - 1</i> query vectors offline</li>
+						</ul>
+					</div>
+				</section>
+
+				<section>
+					<h2>Moving work offline</h2>
+					
+
+					<div>
+						<img src="img/servers-offline.png" width="50%" style="display:inline-block;  vertical-align: middle;">
+						<div style="display: inline-block; width:45%; vertical-align: middle; font-size: 0.7em;">
+							<p><b>First time Popcorn users</b>: Generate a configurable number <i>m</i> of random query vectors, which are sent to the offline server.</p>
+						<p>
+							The server precomputes (and stores locally) replies for these query vectors.
+						</p>
+						</div>
+						
+					</div>
+				</section>
+
+				<section>
+					<h2>Implementation</h2>
+					<br/>
+					<ul>
+						<li>Code base of 8000 lines of C++, out of which 7100 lines are for the object servers</li>
+						<li>The library objects are encrypted using AES with 128-bit keys</li>
+						<li>Hosted in AWS EC2 instances</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Evaluation</h2>
+					<br/>
+					<ol>
+						<li>Can we make Popcorn affordable at scale, and if yes, for what configurations is it affordable?</li>
+						<li>What is the resulting price of privacy?</li>
+					</ol>
+					<br/>
+					<p>Popcorn is compared to <b>NoPriv</b> and <b>BaselinePIR</b></p>
+				</section>
+
+				<section>
+					<h2>Evaluation results</h2>
+					<br/>
+					<ul>
+						<li>
+							The per-request dollar cost in Popcorn is less than three times the per-request dollar cost in a system without privacy.
+						</li>
+						<li>80% of the per-request cost in Popcorn is the cost of transferring data over the network</li>
+						<li>Popcorn requires large objects and many concurrent clients to effectively reduce costs.</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Evaluation results</h2>
+					<br/>
+					<ul>
+						<li>Going from 1 to 10,000 requests, the per-request amortized I/O in Popcorn decreases from approximately 7 TB to 6 GB, a reduction of 1200×</li>
+						<li>Going from 1 to 10,000 requests, the per-request CPU time decreases by a factor of approximately 6</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Costs</h2>
+					<img src="img/costs.png" width="80%">
+					<p>Providing privacy in Popcorn leads to an estimated 2.5x increase in dolla cost</p>
+				</section>
+
+				<section>
+					<h2>Future work</h2>
+					<br/>
+					<ol>
+						<li>Updates to the library</li>
+						<li>Variable size objects</li>
+						<li>Variable object quality and client bandwidth</li>
+						<li>More complex pricing models</li>
+						<li>Targeted ads and recommendations</li>
+					</ol>
+				</section>
+
+
+				<section style="text-align: left;">
+					<h1>Thanks</h1>
+					<p>
+						- Paper available at <a href="https://eprint.iacr.org/2015/489.pdf">https://eprint.iacr.org/2015/489.pdf</a> <br>
+						- Presentation avaiable at <a href="">url</a>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
