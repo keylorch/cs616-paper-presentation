@@ -49,7 +49,7 @@
 						<small>UT Austin / MPI-SWS / Microsoft Research / NYU</small>
 					</p>
 					<p>
-						<small style="font-size: 0.5em;">Created by <a href="http://www.github.com/keylorch">Keylor Chaves</a> / <a href="http://twitter.com/keylorch">@keylorch</a></small>
+						<small style="font-size: 0.5em;">Created by <a target="_blank" href="http://www.github.com/keylorch">Keylor Chaves</a> / <a target="_blank" href="http://twitter.com/keylorch">@keylorch</a></small>
 					</p>
 					<aside class="notes">
 						MPI-SWS: Max Planck Institute for Software Systems
@@ -57,57 +57,28 @@
 				</section>
 
 				<section>
-					<h2>What?</h2>
-					<p>
-						Popcorn: A media content delivery system that comprehensively hides <b>what</b> is consumed but not necessarily <b>who</b> is doing the consumption.
-					</p>
-					<br/>
+					<h2>Scenario</h2>
+					<img src="img/scenario.png">
 					<div class="fragment current-visible">
 						<img src="img/netflix.svg" width="20%" class="in-line">
 						<img src="img/hulu.svg" width="20%" class="in-line">
 						<img src="img/hbo.svg" width="20%" class="in-line">
 					</div>
-				</section>
-
-				<section>
-					<h2>Why?</h2>
-					<br/>
-					<ul>
-						<li>People uncomfortable about exposing their media diet</li>
-						<li>Sexual orientation </li>
-						<li>Political leanings</li>
-						<li>Private cultural affiliations</li>
-						<li>PRIVACY</li>
-					</ul>
-					<aside class="notes">
-						[PROBLEM OF THE PAPER] Explain that a lot of that information can be inferred from media consumption history and although many people do not share this discomfort, on the contrary, they want to expose their consumption to gain recommendations, others don't
-					</aside>
-				</section>
-
-				<section>
-					<p>Is it possible to build a system that hides content consumption while respecting current commercial arrangements, and if so, what would that system cost?</p>
-					<aside class="notes">
-						This paper asks the question...
-					</aside>
-				</section>
-
-				<section>
-					<h2>Requirements</h2>
-					<ol>
-						<li>Hide requests, in a way that is comprehensive and provable.</li>
-						<li>Make it affordable, even at scale</li>
-						<li>Respect current controls on content dissemination</li>
-					</ol>
 					<aside class="notes">
 						1. Hides it from eavesdroppers and the content distributor itself.<br/>
-						2. They should result in no more than a small multiple of what customers pay to access content today
-
+						2. Make it affordable, even at scale. They should result in no more than a small multiple of what customers pay to access content today
+						2. Respect current controls on content dissemination
 					</aside>
 				</section>
 
 				<section>
-					<h2>Private Information Retrieval (PIR)</h2>
-					<p>Protocols that allow clients (content consumers) to request content from one or more servers (content distributors) without them inferring which items the clients requested.</p>
+					<h3>Private Information Retrieval (PIR)</h3>
+					<img src="img/PIR.png">
+					<p><small><i>k</i> servers</small></p>
+					<aside class="notes">
+					Protocols that allow clients (content consumers) to request content from one or more servers (content distributors) without them inferring which items the clients requested.<br/>
+						A PIR protocol is structured around three procedures: Query, Answer, and Decode.
+					</aside>
 				</section>
 
 				<section>
@@ -120,18 +91,65 @@
 				</section>
 
 				<section>
-					<h2>Scenario</h2>
-					<img src="img/scenario.png">
+					<h2>Information-theoretic PIR (ITPIR)</h2>
+					<p>Multi-server PIR protocols. <i>k > 1</i>. </p><p>Each <i>k</i> needs to belong to different administrative domains</p>
+					<p>Chor-Goldreich-Kushilevitz-Sudan (CGKS) ITPIR Protocol</p>
 				</section>
 
 				<section>
-					<h2>PIR</h2>
-					<img src="img/PIR.png">
-					<p><small><i>k</i> servers</small></p>
-					<aside class="notes">
-						A PIR protocol is structured around three procedures: Query, Answer, and Decode.
-					</aside>
+					<h2>(CGKS) ITPIR Protocol</h2>
+					<img src="img/ITPIR1.png" width="80%">
+					<div>
+						<p style="display: inline-block; padding-right: 5%;">
+						<small>
+						<i>k</i>: number of servers<br/>
+						<i>n</i>: size of the library<br/>
+						</small>
+					</p>
+					<p style="display: inline-block;">
+						<small>
+							<i>L</i>: Library<br/>
+							<i>l</i>: size (bits) of each object in L<br/>
+						</small>
+					</p></div>
 				</section>
+
+				<section>
+					<h2>(CGKS) ITPIR Protocol</h2>
+					<img src="img/ITPIR2.png" width="80%">
+					<div>
+						<p style="display: inline-block; padding-right: 5%;">
+						<small>
+						<i>k</i>: number of servers<br/>
+						<i>n</i>: size of the library<br/>
+						</small>
+					</p>
+					<p style="display: inline-block;">
+						<small>
+							<i>L</i>: Library<br/>
+							<i>l</i>: size (bits) of each object in L<br/>
+						</small>
+					</p></div>
+				</section>
+
+				<section>
+					<h2>(CGKS) ITPIR Protocol</h2>
+					<img src="img/ITPIR3.png" width="80%">
+					<div>
+						<p style="display: inline-block; padding-right: 5%;">
+						<small>
+						<i>k</i>: number of servers<br/>
+						<i>n</i>: size of the library<br/>
+						</small>
+					</p>
+					<p style="display: inline-block;">
+						<small>
+							<i>L</i>: Library<br/>
+							<i>l</i>: size (bits) of each object in L<br/>
+						</small>
+					</p></div>
+				</section>
+
 
 				<section>
 					<h2>Computational PIR (CPIR)</h2>
@@ -192,75 +210,18 @@
 				</section>
 
 				<section>
-					<h2>Information-theoretic PIR (ITPIR)</h2>
-					<p>Multi-server PIR protocols. <i>k > 1</i>. </p><p>Each <i>k</i> needs to belong to different administrative domains</p>
-					<p>Chor-Goldreich-Kushilevitz-Sudan (CGKS) IPPIR Protocol</p>
-				</section>
-
-				<section>
-					<h2>(CGKS) IPPIR Protocol</h2>
-					<img src="img/ITPIR1.png" width="80%">
-					<div>
-						<p style="display: inline-block; padding-right: 5%;">
-						<small>
-						<i>k</i>: number of servers<br/>
-						<i>n</i>: size of the library<br/>
-						</small>
-					</p>
-					<p style="display: inline-block;">
-						<small>
-							<i>L</i>: Library<br/>
-							<i>l</i>: size (bits) of each object in L<br/>
-						</small>
-					</p></div>
-				</section>
-
-				<section>
-					<h2>(CGKS) IPPIR Protocol</h2>
-					<img src="img/ITPIR2.png" width="80%">
-					<div>
-						<p style="display: inline-block; padding-right: 5%;">
-						<small>
-						<i>k</i>: number of servers<br/>
-						<i>n</i>: size of the library<br/>
-						</small>
-					</p>
-					<p style="display: inline-block;">
-						<small>
-							<i>L</i>: Library<br/>
-							<i>l</i>: size (bits) of each object in L<br/>
-						</small>
-					</p></div>
-				</section>
-
-				<section>
-					<h2>(CGKS) IPPIR Protocol</h2>
-					<img src="img/ITPIR3.png" width="80%">
-					<div>
-						<p style="display: inline-block; padding-right: 5%;">
-						<small>
-						<i>k</i>: number of servers<br/>
-						<i>n</i>: size of the library<br/>
-						</small>
-					</p>
-					<p style="display: inline-block;">
-						<small>
-							<i>L</i>: Library<br/>
-							<i>l</i>: size (bits) of each object in L<br/>
-						</small>
-					</p></div>
-				</section>
-
-				<section>
 					<h2>Challenges of using PIR</h2>
-					<br/>
+					<p style="text-align: left;">ITPIR</p>
 					<ul>
-						<li>ITPIR requires multiple non-colluding servers</li>
-						<li>CPIR requires expensive cryptographic operations</li>
-						<li>CPIR: the server must load and process all <i>n</i> objects in <i>L</i></li>
-						<li>ITPIR: all servers combined must compute over <i>n</i> objects to serve one on them on average</li>
-						<li>Each query induces <i>O(n)</i> more work</li>
+						<li>Requires multiple non-colluding servers</li>
+						<li>All servers combined must compute over <i>n</i> objects to serve one on them on average</li>
 					</ul>
+					<p style="text-align: left;">CPIR</p>
+					<ul>
+						<li>Requires expensive cryptographic operations</li>
+						<li>The server must load and process all <i>n</i> objects in <i>L</i></li>
+					</ul>
+					<p style="text-align: left;">Each query induces <i>O(n)</i> more work</p>
 					<aside class="notes">
 						The fastest known CPIR protocols [8] are approximately 10-100× slower than ITPIR protocols<br/>
 						Main issue: they are not able to perform at scale. ITPIR (§2.4) requires multiple non- colluding servers, and thus multiple administrative domains, which means library content would have to disseminate beyond its original distribution channel, in apparent conflict with the requirement of respecting existing controls on dissemination
@@ -273,7 +234,7 @@
 					<aside class="notes">
 						each media file is split into segments, and the library is partitioned into columns<br/>
 						A segment is a variable-sized contiguous piece of a media<br/>
-						A column is the union of each of the corresponding segments for the n objects in the library (each is presumed to have the same decomposition into segments—which may require padding objects (§8));
+						A column is the union of each of the corresponding segments for the n objects in the library (each is presumed to have the same decomposition into segments—which may require padding objects
 					</aside>
 				</section>
 
@@ -314,7 +275,6 @@
 					<h2>Composing ITPIR and CPIR</h2>
 					<br/>
 					<ul>
-						<li>Both keys and objects are served privately</li>
 						<li>CPIR is not a performance bottleneck (small keys)</li>
 						<li>Current controls on content protection are respected (<i>m</i> is stored only at the primary content distributor)</li>
 					</ul>
@@ -336,22 +296,32 @@
 						<img src="img/ITPIR2-Q.png" width="50%" style="display:inline-block;  vertical-align: middle;">
 					</div>
 				</section>
-
 				<section>
-					<h2>Specializing batching for media delivery</h2>
-					<br/>
-					<ul>
-					<li>A client's initial delay  is given only by the time it has to wait before it can download the first segment.</li>
-					<li>Other segments are not needid until later and can afford higher processing times.</li>
-					<li>We need to carefully choose, for each column, the longest possible processing cycle, such that users perceive a low inidital delay <i>d</i> and that the movie is played back smoothly</li>
-					</ul>
+					<section>
+						<h2>Specializing batching for media delivery</h2>
+						<br/>
+						<ul>
+						<li>A client's initial delay  is given only by the time it has to wait before it can download the first segment.</li>
+						<li>Other segments are not needed until later and can afford higher processing times.</li>
+						<li>We need to choose, for each column, the longest possible processing cycle, such that users perceive a low initial delay <i>d</i> and that the movie is played back smoothly</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Popcorn Architecture</h2>
+						<img src="img/library.png">
+						<aside class="notes">
+							each media file is split into segments, and the library is partitioned into columns<br/>
+							A segment is a variable-sized contiguous piece of a media<br/>
+							A column is the union of each of the corresponding segments for the n objects in the library (each is presumed to have the same decomposition into segments—which may require padding objects (§8));
+						</aside>
+					</section>
 				</section>
 
 				<section>
 					<h2>Moving work offline</h2>
 					<p><b>Limitation: </b> Given that <i>d</i> is small, the batch sizes for these columns are also small, and the per-request I/O is high</p>
 					<div>
-						<img style="display: inline-block; vertical-align: middle;" src="img/ITPIR1.png" width="60%">
+						<img style="display: inline-block; vertical-align: middle;" src="img/ITPIR1-offline.png" width="60%">
 						<ul style="display: inline-block; vertical-align: middle; width: 35%; font-size: 0.6em;">
 							<li>Only <i>q<sub>k</sub></i> depends on <i>b</i></li>
 							<li>We can compute the reply to the first <i>k - 1</i> query vectors offline</li>
@@ -376,27 +346,6 @@
 				</section>
 
 				<section>
-					<h2>Implementation</h2>
-					<br/>
-					<ul>
-						<li>Code base of 8000 lines of C++, out of which 7100 lines are for the object servers</li>
-						<li>The library objects are encrypted using AES with 128-bit keys</li>
-						<li>Hosted in AWS EC2 instances</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Evaluation</h2>
-					<br/>
-					<ol>
-						<li>Can we make Popcorn affordable at scale, and if yes, for what configurations is it affordable?</li>
-						<li>What is the resulting price of privacy?</li>
-					</ol>
-					<br/>
-					<p>Popcorn is compared to <b>NoPriv</b> and <b>BaselinePIR</b></p>
-				</section>
-
-				<section>
 					<h2>Evaluation results</h2>
 					<br/>
 					<ul>
@@ -409,38 +358,69 @@
 				</section>
 
 				<section>
-					<h2>Evaluation results</h2>
-					<br/>
-					<ul>
-						<li>Going from 1 to 10,000 requests, the per-request amortized I/O in Popcorn decreases from approximately 7 TB to 6 GB, a reduction of 1200×</li>
-						<li>Going from 1 to 10,000 requests, the per-request CPU time decreases by a factor of approximately 6</li>
-					</ul>
+					<h3>ITPIR Implementation</h3>
+				</section>
+
+				<!--section>
+					<h3>ITPIR Implementation</h3>
+					<pre><code class="hljs" data-trim>
+def query(self, index):
+	query = []
+	for server in range(0,len(self.servers) - 1):
+		qj = random.randint(1, self.maxRandomQuery)
+		query.append(qj)
+	eb = 2**(self.n-index);
+	qk = eb
+	for qj in query:
+		qk = qk ^ qj
+	query.append(qk)
+	return query
+					</code></pre>
+					<img src="img/ITPIR1.png" width="50%" style="display: inline-block;">
+					<p style="margin: 0;font-size: 0.8em;"><small>Full code available at <a target="_blank" href="http://bit.ly/1QqViab">http://bit.ly/1QqViab</a></small></p>
 				</section>
 
 				<section>
-					<h2>Costs</h2>
-					<img src="img/Costs.png" width="80%">
-					<p>Providing privacy in Popcorn leads to an estimated 2.5x increase in dolla cost</p>
+					<h3>ITPIR Implementation</h3>
+					<pre><code class="hljs" data-trim>
+def answer(self, query):
+	result = 0;
+	for i in range(self.l,0, -1):	# Compute the query . Library result 
+		bit = 0	 # (product over the two element Galois field)
+		for j in range(self.n, 0, -1):
+			and1 = query & 2 ** (j-1)
+			and2 = self.library[self.n-j] & 2 ** (i-1)
+			and1 = 1 if and1 > 0 else 0
+			and2 = 1 if and2 > 0 else 0
+			bit = bit ^ (and1 & and2)
+		result = result << 1
+		result = result | bit
+	return result
+					</code></pre>
+					<img src="img/ITPIR2.png" width="50%" style="display: inline-block;">
+					<p style="margin: 0;font-size: 0.8em;"><small>Full code available at <a target="_blank" href="http://bit.ly/1QqViab">http://bit.ly/1QqViab</a></small></p>
 				</section>
 
 				<section>
-					<h2>Future work</h2>
-					<br/>
-					<ol>
-						<li>Updates to the library</li>
-						<li>Variable size objects</li>
-						<li>Variable object quality and client bandwidth</li>
-						<li>More complex pricing models</li>
-						<li>Targeted ads and recommendations</li>
-					</ol>
-				</section>
+					<h3>ITPIR Implementation</h3>
+					<pre><code class="hljs" data-trim>
+def decode(self, answers):
+	result = 0	#Decodes the answer by XORing all the 
+	for answer in answers: #individual answers
+		result = result ^ answer
+	return result
+					</code></pre>
+					<img src="img/ITPIR3.png" width="50%" style="display: inline-block;">
+					<p style="margin: 0;font-size: 0.8em;"><small>Full code available at <a target="_blank" href="http://bit.ly/1QqViab">http://bit.ly/1QqViab</a></small></p>
+				</section !-->
 
 
 				<section>
 					<h2>Information available at</h2>
 					<p style="text-align: left;">
-						Paper:<br/><a href="https://eprint.iacr.org/2015/489.pdf">https://eprint.iacr.org/2015/489.pdf</a> <br>
-						Presentation:<br/><a href="http://keylorch.github.io/cs616-paper-presentation/">http://keylorch.github.io/cs616-paper-presentation/</a>
+						Paper:<br/><a target="_blank" href="https://eprint.iacr.org/2015/489.pdf">https://eprint.iacr.org/2015/489.pdf</a> <br>
+						Presentation:<br/><a target="_blank" href="http://keylorch.github.io/cs616-paper-presentation/">http://keylorch.github.io/cs616-paper-presentation/</a><br/>
+						ITPIR Code Example: <br/><a target="_blank" href="http://bit.ly/1QqViab">http://bit.ly/1QqViab</a>
 					</p>
 				</section>
 
@@ -453,13 +433,21 @@
 						<small>UT Austin / MPI-SWS / Microsoft Research / NYU</small>
 					</p>
 					<p>
-						<small style="font-size: 0.5em;">Created by <a href="http://www.github.com/keylorch">Keylor Chaves</a> / <a href="http://twitter.com/keylorch">@keylorch</a></small>
+						<small style="font-size: 0.5em;">Created by <a target="_blank" href="http://www.github.com/keylorch">Keylor Chaves</a> / <a target="_blank" href="http://twitter.com/keylorch">@keylorch</a></small>
 					</p>
 					<aside class="notes">
 						MPI-SWS: Max Planck Institute for Software Systems
 					</aside>
 				</section>
-
+				<aside class="notes">
+				<ul>
+					<li>Updates to the library</li>
+						<li>Variable size objects</li>
+						<li>Variable object quality and client bandwidth</li>
+						<li>More complex pricing models</li>
+						<li>Targeted ads and recommendations</li>
+						</ul>
+				</aside>
 			</div>
 
 		</div>
